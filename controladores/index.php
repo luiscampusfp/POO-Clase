@@ -14,6 +14,22 @@ if (isset($_POST['enviar'])) {
     $ultimo = $con->ultimoProducto();
     $texto = "Producto insertado " . $ultimo->getNombre();
 
-    header("location: index.php?dato=" . $texto);
+    header("location: index.php?datoP=" . $texto);
+}
+
+if (isset($_POST['enviarUser'])) {
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $creditos = $_POST['creditos'];
+
+    $usuario = new Usuario($nombre, $correo, $creditos);
+    
+    $con = new Controlador();
+
+    $con->addUsuario($usuario);
+
+    $texto = "Usuario insertado";
+
+    //header("location: index.php?datoU=" . $texto);
 }
 

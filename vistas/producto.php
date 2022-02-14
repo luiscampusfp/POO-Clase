@@ -2,7 +2,7 @@
 
 class VistaProducto{
 
-    function MostrarFormulario($dato=-1)
+    function MostrarFormulario($datoP=-1)
     {
         ?>
         <form action="" method="post">
@@ -15,8 +15,8 @@ class VistaProducto{
         <input type="submit" value="Enviar" name="enviar">
     </form>
     <?php
-    if ($dato!=-1) {
-        echo "<p>$dato</p>";
+    if ($datoP!=-1) {
+        echo "<p>$datoP</p>";
     }
     ?>
         <?php
