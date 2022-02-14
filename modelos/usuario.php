@@ -2,7 +2,7 @@
 
 class Usuario
 {
-    //AGREGACION
+    //AGREGACIO
     private $productos;
     
     function getProductos()
