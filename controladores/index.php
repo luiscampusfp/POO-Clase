@@ -30,6 +30,6 @@ if (isset($_POST['enviarUser'])) {
 
     $texto = "Usuario insertado";
 
-    //header("location: index.php?datoU=" . $texto);
+    header("location: index.php?datoU=" . $texto);
 }
 
