@@ -17,10 +17,15 @@ class MySQLConexion
     }
     function InsertarUsuario($usuario)
     {
-        mysqli_query($this->conexion, "Insert into usuario values ('" . $usuario->getNombre() . "', '" . $usuario->getCorreo() . "'," . $usuario->getCreditos() . ")");
-        foreach ($usuario->getProductos() as $pro) {
-            mysqli_query($this->conexion, "Insert into `usuario_producto` values ('" . $usuario->getCorreo() . "'," . $pro->getCodigo() . ")");
+        $result = mysqli_query($this->conexion, "select * from usuarios where correo='" . $usuario->getCorreo() . "'");
+        if (mysqli_num_rows($result) == 0) {
+            mysqli_query($this->conexion, "Insert into usuario values ('" . $usuario->getNombre() . "', '" . $usuario->getCorreo() . "'," . $usuario->getCreditos() . ")");
+            foreach ($usuario->getProductos() as $pro) {
+                mysqli_query($this->conexion, "Insert into `usuario_producto` values ('" . $usuario->getCorreo() . "'," . $pro->getCodigo() . ")");
+            }
+            return true;
         }
+        return false;
     }
 
     function DatosProductos()

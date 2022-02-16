@@ -30,11 +30,14 @@ if (isset($_POST['enviarUser'])) {
         }
     }
 
-    $usuario = new Usuario($nombre, $correo, $creditos,$productos);
+    $usuario = new Usuario($nombre, $correo, $creditos, $productos);
 
-    $con->addUsuario($usuario);
+    if ($con->addUsuario($usuario)) {
+        $texto = "Usuario insertado";
+    } else {
+        $texto = "Ya existe un usuario con ese correo";
+    }
 
-    $texto = "Usuario insertado";
 
     header("location: ?datoU=" . $texto);
 }

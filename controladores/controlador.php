@@ -31,7 +31,7 @@ class Controlador
     function addUsuario($usuarios)
     {
         array_push($this->usuarios, $usuarios);
-        $this->con->InsertarUsuario($usuarios);
+        return $this->con->InsertarUsuario($usuarios);
     }
 
     function getProductos()
