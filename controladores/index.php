@@ -1,35 +1,40 @@
 <?php
 require_once("controlador.php");
 
+$con = new Controlador();
+
 if (isset($_POST['enviar'])) {
     $nombre = $_POST['nombre'];
     $codigo = $_POST['codigo'];
     $precio = $_POST['precio'];
 
     $producto = new Producto($nombre, $codigo, $precio);
-    $con = new Controlador();
 
     $con->addProducto($producto);
 
     $ultimo = $con->ultimoProducto();
     $texto = "Producto insertado " . $ultimo->getNombre();
 
-    header("location: index.php?datoP=" . $texto);
+    header("location: ?datoP=" . $texto);
 }
 
 if (isset($_POST['enviarUser'])) {
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
     $creditos = $_POST['creditos'];
+    $productos = array();
 
-    $usuario = new Usuario($nombre, $correo, $creditos);
-    
-    $con = new Controlador();
+    foreach ($con->getProductos() as $pro) {
+        if (isset($_POST['pro' . $pro->getCodigo()])) {
+            array_push($productos, $pro);
+        }
+    }
+
+    $usuario = new Usuario($nombre, $correo, $creditos,$productos);
 
     $con->addUsuario($usuario);
 
     $texto = "Usuario insertado";
 
-    header("location: index.php?datoU=" . $texto);
+    header("location: ?datoU=" . $texto);
 }
-

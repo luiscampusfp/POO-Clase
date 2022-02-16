@@ -1,6 +1,6 @@
 <?php
-require_once("modelos/producto.php");
-require_once('modelos/usuario.php');
+require_once("../modelos/producto.php");
+require_once('../modelos/usuario.php');
 
 class MySQLConexion
 {
@@ -17,6 +17,19 @@ class MySQLConexion
     }
     function InsertarUsuario($usuario)
     {
-        mysqli_query($this->conexion, "Insert into users values ('" . $usuario->getNombre() . "', '" . $usuario->getCorreo() . "'," . $usuario->getCreditos() . ")");
+        mysqli_query($this->conexion, "Insert into usuario values ('" . $usuario->getNombre() . "', '" . $usuario->getCorreo() . "'," . $usuario->getCreditos() . ")");
+        foreach ($usuario->getProductos() as $pro) {
+            mysqli_query($this->conexion, "Insert into `usuario_producto` values ('" . $usuario->getCorreo() . "'," . $pro->getCodigo() . ")");
+        }
+    }
+
+    function DatosProductos()
+    {
+        $result = mysqli_query($this->conexion, "select * from producto");
+        $productos = array();
+        while ($data = mysqli_fetch_assoc($result)) {
+            array_push($productos, new Producto($data['nombre'], $data['codigo'], $data['precio']));
+        }
+        return $productos;
     }
 }

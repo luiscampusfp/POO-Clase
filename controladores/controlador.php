@@ -1,7 +1,7 @@
 <?php
-require_once('modelos/producto.php');
-require_once('modelos/usuario.php');
-require_once("conexion/conexionMySQL.php");
+require_once('../modelos/producto.php');
+require_once('../modelos/usuario.php');
+require_once("../conexion/conexionMySQL.php");
 
 class Controlador
 {
@@ -32,5 +32,11 @@ class Controlador
     {
         array_push($this->usuarios, $usuarios);
         $this->con->InsertarUsuario($usuarios);
+    }
+
+    function getProductos()
+    {
+        $this->productos = $this->con->DatosProductos();
+        return $this->productos;
     }
 }

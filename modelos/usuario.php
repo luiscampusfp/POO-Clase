@@ -4,7 +4,7 @@ class Usuario
 {
     //AGREGACIO
     private $productos;
-    
+
     function getProductos()
     {
         return $this->productos;
@@ -14,11 +14,12 @@ class Usuario
     private $correo;
     private $creditos;
 
-    function __construct($nombre,$correo,$creditos)
+    function __construct($nombre, $correo, $creditos, $productos)
     {
         $this->nombre = $nombre;
         $this->correo = $correo;
         $this->creditos = $creditos;
+        $this->productos = $productos;
     }
 
     function getNombre()
@@ -48,7 +49,8 @@ class Usuario
         $this->creditos = $creditos;
     }
 
-    function comprarCredito(){
-        $this->creditos+=100;
+    function comprarCredito()
+    {
+        $this->creditos += 100;
     }
 }
