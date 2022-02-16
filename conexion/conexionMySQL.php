@@ -15,7 +15,8 @@ class MySQLConexion
     {
         mysqli_query($this->conexion, "Insert into producto values ('" . $producto->getNombre() . "', " . $producto->getCodigo() . "," . $producto->getPrecio() . ")");
     }
-    function InsertarUsuario($usuario){
-        mysqli_query($this->conexion, "Insert into users values ('" . $usuario->getNombre() . "', '". $usuario->getCorreo() . "'," . $usuario->getCreditos() . ")");
+    function InsertarUsuario($usuario)
+    {
+        mysqli_query($this->conexion, "Insert into users values ('" . $usuario->getNombre() . "', '" . $usuario->getCorreo() . "'," . $usuario->getCreditos() . ")");
     }
 }
