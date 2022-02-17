@@ -58,4 +58,10 @@ class MySQLConexion
         }
         return $usuarios;
     }
+
+    function ActualizarProducto($producto)
+    {
+        mysqli_query($this->conexion, "update producto set precio=" . $producto->getPrecio() . " where codigo=" . $producto->getCodigo());
+
+    }
 }

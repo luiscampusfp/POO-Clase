@@ -41,3 +41,12 @@ if (isset($_POST['enviarUser'])) {
 
     header("location: ?datoU=" . $texto);
 }
+
+if (isset($_GET['descid'])) {
+    $producto = $con->buscarProducto($_GET['descid']);
+    if ($producto != false) {
+        $producto->realizarDescuento();
+        $con->actualizarProducto($producto);
+    }
+    header("location:producto.php");
+}

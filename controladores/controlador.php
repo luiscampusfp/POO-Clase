@@ -11,9 +11,9 @@ class Controlador
 
     function __construct()
     {
-        $this->productos = array();
-        $this->usuarios = array();
         $this->con = new MySQLConexion("localhost", "root", "", "tienda");
+        $this->productos = $this->con->DatosProductos();
+        $this->usuarios = $this->con->DatosUsuarios();
     }
 
     function addProducto($producto)
@@ -36,13 +36,31 @@ class Controlador
 
     function getProductos()
     {
-        $this->productos = $this->con->DatosProductos();
         return $this->productos;
     }
 
     function getUsuarios()
     {
-        $this->usuarios = $this->con->DatosUsuarios();
         return $this->usuarios;
+    }
+
+    function buscarProducto($id)
+    {
+        foreach ($this->productos as $pro) {
+            if ($pro->getCodigo() == $id) {
+                return $pro;
+            }
+        }
+        return false;
+    }
+
+    function actualizarProducto($producto)
+    {
+        $this->con->ActualizarProducto($producto);
+        for ($i = 0; $i < count($this->productos); $i++) {
+            if ($this->productos[$i]->getCodigo() == $producto->getCodigo()) {
+                $this->productos[$i]->setPrecio($producto->getPrecio());
+            }
+        }
     }
 }
