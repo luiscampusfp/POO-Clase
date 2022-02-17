@@ -11,4 +11,5 @@ if (isset($_GET['datoP'])) {
 } else {
     $productoView->MostrarFormulario();
 }
+$productoView->MostrarProductos();
 $mainView->MostrarPie();
