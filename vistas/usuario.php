@@ -27,6 +27,41 @@ class VistaUsuario
             echo "<p>$datoU</p>";
         }
         ?>
+    <?php
+    }
+
+    function MostrarUsuarios()
+    {
+        $con = new Controlador();
+    ?>
+        <table>
+            <tr>
+                <td>Nombre</td>
+                <td>Correo</td>
+                <td>Credito</td>
+                <td>Productos</td>
+            </tr>
+            <?php
+            foreach ($con->getUsuarios() as $user) {
+                echo "<tr>";
+                echo "<td>" . $user->getNombre() . "</td>";
+                echo "<td>" . $user->getCorreo() . "</td>";
+                echo "<td>" . $user->getCreditos() . "</td>";
+            ?>
+                <td>
+                    <ul>
+                        <?php
+                        foreach ($user->getProductos() as $producto) {
+                            echo "<li>" . $producto->getNombre() . "</li>";
+                        }
+                        ?>
+                    </ul>
+                </td>
+            <?php
+                echo "</tr>";
+            }
+            ?>
+        </table>
 <?php
     }
 }

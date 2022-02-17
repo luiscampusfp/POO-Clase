@@ -11,5 +11,6 @@ if (isset($_GET['datoU'])) {
 } else {
     $usuarioView->MostrarFormularioUsuario();
 }
+$usuarioView->MostrarUsuarios();
 
 $mainView->MostrarPie();

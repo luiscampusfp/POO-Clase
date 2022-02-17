@@ -37,4 +37,25 @@ class MySQLConexion
         }
         return $productos;
     }
+
+    function ProductosUsuario($correo)
+    {
+        $result = mysqli_query($this->conexion, "SELECT * FROM usuario_producto up INNER JOIN producto p on up.idproducto=p.codigo where up.idusuario='$correo'");
+        $productos = array();
+        while ($data = mysqli_fetch_assoc($result)) {
+            array_push($productos, new Producto($data['nombre'], $data['codigo'], $data['precio']));
+        }
+        return $productos;
+    }
+
+    function DatosUsuarios()
+    {
+        $result = mysqli_query($this->conexion, "select * from usuario");
+        $usuarios = array();
+        while ($data = mysqli_fetch_assoc($result)) {
+            $productos = $this->ProductosUsuario($data['correo']);
+            array_push($usuarios, new Usuario($data['nombre'], $data['correo'], $data['creditos'], $productos));
+        }
+        return $usuarios;
+    }
 }

@@ -39,4 +39,10 @@ class Controlador
         $this->productos = $this->con->DatosProductos();
         return $this->productos;
     }
+
+    function getUsuarios()
+    {
+        $this->usuarios = $this->con->DatosUsuarios();
+        return $this->usuarios;
+    }
 }
